@@ -1,0 +1,20 @@
+[{
+  "namespace": "br.com.deyvidfernandes.customer.producer.dto",
+  "type": "record",
+  "name": "Email",
+  "fields": [
+    {"name": "ClienteId", "type": [ "int", "null" ] },
+    {"name": "email", "type": [ "string", "null" ] }
+  ]
+},
+{
+  "namespace": "br.com.deyvidfernandes.customer.producer.dto",
+  "type": "record",
+  "name": "Customer",
+  "fields": [
+     {"name": "id", "type": "int"},
+     {"name": "nome", "type": "string"},
+     {"name": "idade", "type": [ "int", "null" ]},
+     {"name": "email", "type": "br.com.deyvidfernandes.customer.producer.dto.Email"}
+  ]
+}]

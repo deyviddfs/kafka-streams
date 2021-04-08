@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "1acabe64-88df-47a1-8abb-84d642ba282f",
+		"name": "kafka-stream",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer - New",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "11",
+							"type": "text"
+						},
+						{
+							"key": "nome",
+							"value": "Bruno Siqueira",
+							"type": "text"
+						},
+						{
+							"key": "idade",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/cliente/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Email - New",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "clienteId",
+							"value": "11",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "bs7@midway.com.br",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/cliente/email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cliente",
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subjects - New",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": " application/vnd.schemaregistry.v1+json, application/vnd.schemaregistry+json, application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": " application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"schema\": \"{ \\\"type\\\": \\\"record\\\", \\\"name\\\": \\\"Customer\\\", \\\"fields\\\": [ { \\\"type\\\": \\\"string\\\", \\\"name\\\": \\\"nome\\\" }, { \\\"type\\\": \\\"int\\\", \\\"name\\\": \\\"idade\\\" }] }\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/subjects/CUSTOMER-value/versions?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subjects",
+						"CUSTOMER-value",
+						"versions"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subjects - List All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/subjects",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subjects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subjects - By Id - Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/subjects/STREAMS.CUSTOMER-value/versions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subjects",
+						"STREAMS.CUSTOMER-value",
+						"versions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subjects - By Id - Version - Detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/subjects/CUSTOMER-value/versions/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subjects",
+						"CUSTOMER-value",
+						"versions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subjects - Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/subjects/CUSTOMER-value/versions/latest?permanent=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"subjects",
+						"CUSTOMER-value",
+						"versions",
+						"latest"
+					],
+					"query": [
+						{
+							"key": "permanent",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schemas - List All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/schemas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schemas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schemas - By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/schemas/ids/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schemas",
+						"ids",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schemas - By Id - Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/schemas/ids/7/versions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"schemas",
+						"ids",
+						"7",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

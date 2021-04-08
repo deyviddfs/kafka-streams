@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.2</version>
+    </parent>
+    <groupId>br.com.deyvidfernandes</groupId>
+    <artifactId>cliente-producer</artifactId>
+    <version>0.0.1</version>
+    <name>cliente-producer</name>
+    <description>Projeto de demonstração do Kafka Streams</description>
+    <properties>
+        <java.version>14</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <!-- Serealizar e Desealizar Avro-->
+        <!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>1.10.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.confluent/kafka-avro-serializer -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <!-- Gerar classes Avro-->
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-compiler</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-maven-plugin</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- Gerar classes Avro baseado no schema-->
+            <plugin>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-maven-plugin</artifactId>
+                <version>1.10.2</version>
+                <executions>
+                    <execution>
+                        <id>schemas</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>schema</goal>
+                            <goal>protocol</goal>
+                            <goal>idl-protocol</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/src/main/resources/</sourceDirectory>
+                            <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>14</source>
+                    <target>14</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>repo3</id>
+            <name>Confluent</name>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+</project>
